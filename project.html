@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- 4. PEMASARAN & VISIBILITAS (SEO DASAR & META TAGS) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Kelas PSTI-D | Teknik Informatika UNILA</title>
+    <meta name="description" content="Portal resmi jadwal kuliah, KRS, dan informasi terkini mahasiswa prodi Teknik Informatika Kelas PSTI-D Universitas Lampung.">
+    <meta name="author" content="Mahasiswa Kelas PSTI-D UNILA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph for Social Media Sharing (WhatsApp, Facebook, LinkedIn) -->
+    <meta property="og:title" content="Jadwal Kelas PSTI-D Teknik Informatika UNILA">
+    <meta property="og:description" content="Akses jadwal mingguan, info KRS, dan info dosen kelas PSTI-D tanpa tanya grup.">
+    <meta property="og:type" content="website">
+
+    <!-- FONT TEGAS & FORMAL: Plus Jakarta Sans (Judul Tegas) & Inter (Teks) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eeeffe;
+            --bg-dark: #0a0e1a;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-border: rgba(56, 189, 248, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            
+            --accent-amber: #f59e0b;
+            --amber-bg: rgba(245, 158, 11, 0.15);
+            --accent-emerald: #10b981;
+            --emerald-bg: rgba(16, 185, 129, 0.15);
+            --electric-blue: #38bdf8;
+            
+            --font-head: "Plus Jakarta Sans", sans-serif;
+            --font-body: "Inter", sans-serif;
+            
+            --radius: 16px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            background: var(--bg-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas Latar Belakang Efek Listrik Dynamic */
+        #electric-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Flash Lampu Arus Listrik saat Scroll */
+        .electric-scroll-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--electric-blue), var(--accent-amber), transparent);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .electric-scroll-flash.active {
+            opacity: 1;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.2; margin: 0; font-weight: 800; letter-spacing: -0.02em; }
+        p { margin: 0; }
+        a { color: inherit; }
+
+        :focus-visible { outline: 3px solid var(--electric-blue); outline-offset: 2px; }
+
+        .skip-link {
+            position: absolute; left: 12px; top: -60px;
+            background: var(--accent-amber); color: #0a0e1a;
+            padding: 8px 16px; border-radius: 8px; font-weight: 700;
+            z-index: 100; transition: top 0.2s ease;
+        }
+        .skip-link:focus { top: 12px; }
+
+        /* ---------- Header Navigation ---------- */
+        .header-container {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(10, 14, 26, 0.92);
+            backdrop-filter: blur(12px); color: #fff;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .header-inner {
+            max-width: 1140px; margin: 0 auto; padding: 14px 24px;
+            display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+        }
+
+        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .brand-mark {
+            font-family: var(--font-head); font-weight: 900; font-size: 1.15rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #38bdf8 100%);
+            color: #fff; padding: 6px 14px; border-radius: 10px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .brand-text { font-family: var(--font-head); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: #fff; }
+
+        /* 2. Sertifikat Keamanan SSL/HTTPS Badge */
+        .ssl-badge {
+            font-size: 0.75rem; background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 4px 10px; border-radius: 99px; display: flex; align-items: center; gap: 6px;
+            font-weight: 600;
+        }
+
+        .nav { display: flex; gap: 6px; margin-right: auto; }
+        .nav a {
+            text-decoration: none; padding: 8px 14px; border-radius: 10px;
+            color: #94a3b8; font-weight: 700; font-size: 0.92rem; transition: all 0.2s ease;
+        }
+        .nav a:hover { background: rgba(56, 189, 248, 0.12); color: var(--electric-blue); }
+
+        /* User Header Area */
+        .user-nav { display: flex; align-items: center; gap: 10px; }
+        .btn-login-trigger {
+            padding: 8px 18px; border: 0; border-radius: 8px;
+            background: var(--primary); color: #fff; font: inherit;
+            font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+        .btn-login-trigger:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+        .user-profile {
+            display: none; align-items: center; gap: 12px;
+            background: rgba(255, 255, 255, 0.08); padding: 6px 14px;
+            border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .user-profile .user-name { font-weight: 700; font-size: 0.9rem; color: #f8fafc; }
+        .btn-logout {
+            background: rgba(239, 68, 68, 0.2); color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 10px;
+            border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-weight: 700;
+        }
+        .btn-logout:hover { background: rgba(239, 68, 68, 0.4); }
+
+        /* ---------- Modals (Auth & Legal Privacy) ---------- */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 14, 26, 0.85); backdrop-filter: blur(8px);
+            z-index: 1000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-card {
+            background: #0f172a; border-radius: 20px; width: 100%;
+            max-width: 500px; padding: 32px; box-shadow: var(--shadow-lg);
+            position: relative; max-height: 85vh; overflow-y: auto;
+            border: 1px solid var(--card-border);
+            animation: popIn 0.25s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-close {
+            position: absolute; top: 18px; right: 20px; background: none;
+            border: 0; font-size: 1.5rem; color: var(--text-muted); cursor: pointer;
+        }
+        .auth-tabs { display: flex; border-bottom: 2px solid var(--border-color); margin-bottom: 24px; }
+        .auth-tab-btn {
+            flex: 1; padding: 10px; border: 0; background: none;
+            font-family: var(--font-head); font-weight: 800; font-size: 1rem;
+            color: var(--text-muted); cursor: pointer; position: relative;
+        }
+        .auth-tab-btn.active { color: var(--electric-blue); }
+        .auth-tab-btn.active::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%;
+            height: 2px; background: var(--electric-blue);
+        }
+        .auth-form { display: none; flex-direction: column; gap: 16px; }
+        .auth-form.active { display: flex; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+        .form-group input, .form-group textarea {
+            padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color);
+            font: inherit; font-size: 0.95rem; background: #1e293b; color: #fff;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--electric-blue); outline: none; }
+        .btn-auth-submit {
+            padding: 12px; border: 0; border-radius: 10px; background: var(--primary);
+            color: #fff; font: inherit; font-weight: 800; cursor: pointer; margin-top: 8px;
+        }
+        .btn-auth-submit:hover { background: var(--primary-hover); }
+
+        /* ---------- Main Content ---------- */
+        main { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+        .hero {
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px;
+            align-items: center; padding: 56px 0 40px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.4rem, 5vw, 3.5rem); font-weight: 900; color: #fff;
+            letter-spacing: -0.03em;
+        }
+        .hero-text p { margin: 18px 0 28px; color: var(--text-muted); font-size: 1.12rem; max-width: 44ch; font-weight: 500; }
+
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+            background: var(--primary); color: #fff; border-radius: 12px;
+            text-decoration: none; font-weight: 800; box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+            transition: all 0.2s ease; border: 0; cursor: pointer;
+        }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px;
+            background: rgba(30, 41, 59, 0.7); color: #fff; border-radius: 12px; border: 1px solid var(--border-color);
+            text-decoration: none; font-weight: 700; transition: all 0.2s ease; cursor: pointer;
+            backdrop-filter: blur(6px);
+        }
+        .btn-secondary:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--electric-blue); }
+
+        /* Papan Hari Ini */
+        .today {
+            background: rgba(15, 23, 42, 0.9);
+            color: #fff; border-radius: 24px; padding: 32px; box-shadow: var(--shadow-lg);
+            border: 1px solid var(--card-border); position: relative; overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .today::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--accent-amber));
+        }
+        .today-date { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; text-transform: capitalize; }
+        .today-clock {
+            font-family: var(--font-head); font-weight: 900; font-size: 3.8rem;
+            line-height: 1; margin: 6px 0; color: var(--accent-amber);
+            font-variant-numeric: tabular-nums; text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+        }
+        .today-status { margin: 8px 0 20px; font-weight: 700; color: #cbd5e1; font-size: 1.05rem; }
+
+        .today-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+        .today-list li {
+            display: grid; grid-template-columns: 100px 1fr; gap: 12px; padding: 12px 16px;
+            border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .today-list .jam { color: #94a3b8; font-variant-numeric: tabular-nums; font-size: 0.88rem; font-weight: 700; }
+        .today-list .nama { font-weight: 700; font-size: 0.95rem; }
+        .today-list .ruang { display: block; color: var(--electric-blue); font-weight: 600; font-size: 0.82rem; margin-top: 2px; }
+        .today-list li.now { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); }
+        .today-list li.now .jam, .today-list li.now .ruang { color: #6ee7b7; }
+        .today-list li.done { opacity: 0.4; }
+
+        /* ---------- Sections ---------- */
+        .section { padding: 48px 0; }
+        .section-head { margin-bottom: 28px; }
+        .section-head h2 { font-size: clamp(1.8rem, 3vw, 2.2rem); color: #fff; font-weight: 800; }
+        .section-head p { color: var(--text-muted); margin-top: 6px; font-size: 1.05rem; font-weight: 500; }
+
+        /* Tabs Filter */
+        .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+        .tab {
+            padding: 10px 22px; border: 1px solid var(--border-color); background: rgba(15, 23, 42, 0.8);
+            border-radius: 99px; font: inherit; font-weight: 700; color: var(--text-muted);
+            cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-sm);
+        }
+        .tab:hover { border-color: var(--electric-blue); color: #fff; transform: translateY(-1px); }
+        .tab[aria-selected="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .tab .dot {
+            display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--accent-amber); margin-left: 8px;
+        }
+
+        /* Jadwal Mingguan */
+        .week { display: grid; gap: 20px; }
+        .day { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); backdrop-filter: blur(10px); }
+        .day.is-today { border-color: var(--electric-blue); box-shadow: 0 0 15px rgba(56, 189, 248, 0.25); }
+
+        .day-title { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: rgba(30, 41, 59, 0.8); border-bottom: 1px solid var(--border-color); }
+        .day-title h3 { font-size: 1.2rem; color: #fff; font-weight: 800; }
+        .badge-today { background: var(--emerald-bg); color: #6ee7b7; font-size: 0.8rem; font-weight: 800; padding: 4px 12px; border-radius: 99px; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+        .slot { display: grid; grid-template-columns: 140px 1.2fr 1fr 120px; gap: 20px; padding: 18px 24px; border-top: 1px solid var(--border-color); align-items: center; }
+        .slot:first-of-type { border-top: 0; }
+        .slot .jam { font-variant-numeric: tabular-nums; font-weight: 800; color: var(--electric-blue); font-size: 0.95rem; }
+        .slot .matkul { font-weight: 800; color: #fff; font-size: 1.05rem; }
+        .slot .kode { display: block; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; margin-top: 2px; }
+        .slot .dosen { color: var(--text-muted); font-size: 0.92rem; font-weight: 500; }
+        .slot .ruang { justify-self: start; background: rgba(56, 189, 248, 0.12); color: #7dd3fc; font-weight: 700; font-size: 0.85rem; padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.2); }
+        .slot.bentrok { background: var(--amber-bg); border-left: 4px solid var(--accent-amber); }
+        .day-empty { padding: 24px; color: var(--text-muted); text-align: center; font-style: italic; }
+
+        /* Tabel KRS */
+        .table-wrap { overflow-x: auto; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px); }
+        .matkul-table { width: 100%; border-collapse: collapse; min-width: 840px; }
+        .matkul-table th, .matkul-table td { text-align: left; padding: 16px 24px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        .matkul-table th { background: rgba(30, 41, 59, 0.8); color: #fff; font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; }
+        .matkul-table td.kode { font-variant-numeric: tabular-nums; color: var(--text-muted); font-weight: 700; }
+        .matkul-table td.nama-mk { font-weight: 800; color: #fff; }
+        .matkul-table tfoot th, .matkul-table tfoot td { background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 800; border-top: 2px solid var(--border-color); border-bottom: 0; }
+
+        /* 1. SEKSI TENTANG KAMI & KONTAK LOKASI (GOOGLE MAPS) */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .contact-box { background: var(--card-bg); padding: 28px; border-radius: var(--radius); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px); }
+        .maps-box { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-color); min-height: 280px; }
+        .maps-box iframe { width: 100%; height: 100%; border: 0; min-height: 280px; }
+
+        /* 5. PEMELIHARAAN & BACKUP TOOLBAR */
+        .backup-bar { background: rgba(56, 189, 248, 0.08); border: 1px dashed var(--electric-blue); padding: 16px; border-radius: 12px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+
+        /* Footer & Legal Links */
+        .footer { margin-top: 60px; padding: 40px 24px; background: #050811; color: #94a3b8; font-size: 0.95rem; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
+        .footer-links { display: flex; gap: 16px; }
+        .footer-links button { background: none; border: 0; color: #94a3b8; cursor: pointer; font-size: 0.9rem; text-decoration: underline; font-weight: 600; }
+        .footer-links button:hover { color: #fff; }
+
+        @media (max-width: 860px) {
+            .hero { grid-template-columns: 1fr; padding-top: 32px; gap: 32px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav { margin-right: 0; order: 3; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML5 Canvas Latar Belakang Efek Arus Listrik (HIMATRO Vibe) -->
+    <canvas id="electric-canvas"></canvas>
+    <div class="electric-scroll-flash" id="scroll-flash"></div>
+
+    <a class="skip-link" href="#jadwal">Langsung ke jadwal</a>
+
+    <!-- Header Navigation -->
+    <div class="header-container">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="Beranda Kelas PSTI-D">
+                <span class="brand-mark">PSTI-D</span>
+                <span class="brand-text">Jadwal Kelas</span>
+            </a>
+
+            <!-- 2. Sertifikat Keamanan SSL/HTTPS Badge -->
+            <div class="ssl-badge" title="Koneksi terenkripsi aman SSL/HTTPS">
+                🔒 HTTPS Safe
+            </div>
+
+            <nav class="nav" aria-label="Menu utama">
+                <a href="#jadwal">Jadwal</a>
+                <a href="#matkul">KRS</a>
+                <a href="#tentang">Tentang & Kontak</a>
+                <a href="#info">Info</a>
+            </nav>
+
+            <div class="user-nav">
+                <button class="btn-login-trigger" id="btn-login-open">Masuk / Daftar</button>
+
+                <div class="user-profile" id="user-profile">
+                    <span class="user-name" id="user-display-name">Mahasiswa PSTI-D</span>
+                    <button class="btn-logout" id="btn-logout">Keluar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form Login & Registrasi -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login-btn">Masuk</button>
+                <button class="auth-tab-btn" id="tab-register-btn">Daftar Pengguna</button>
+            </div>
+            <form class="auth-form active" id="form-login">
+                <div class="form-group">
+                    <label for="login-username">Username atau NPM</label>
+                    <input type="text" id="login-username" placeholder="Masukkan username atau NPM" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="btn-auth-submit">Masuk ke Akun</button>
+            </form>
+
+            <form class="auth-form" id="form-register">
+                <div class="form-group">
+                    <label for="reg-fullname">Nama Lengkap</label>
+                    <input type="text" id="reg-fullname" placeholder="Contoh: Michael Tilosand" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-npm">NPM / Username</label>
+                    <input type="text" id="reg-npm" placeholder="Contoh: 2615061001" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password Baru</label>
+                    <input type="password" id="reg-password" placeholder="Buat password" required>
+                </div>
+                <button type="submit" class="btn-auth-submit">Daftar Akun Baru</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. MODAL LEGALITAS (PRIVACY POLICY & TERMS) -->
+    <div class="modal-overlay" id="legal-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="legal-modal-close">&times;</button>
+            <h3 id="legal-title" style="margin-bottom: 14px;">Kebijakan Privasi</h3>
+            <div id="legal-content" style="color: var(--text-muted); font-size: 0.95rem;">
+                <!-- Konten legalitas dimuat lewat JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="top">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Kuliah hari ini, tanpa tanya grup.</h1>
+                <p>Jadwal kuliah kelas PSTI-D Teknik Informatika UNILA: jam, dosen, dan ruangan dalam satu portal terpadu.</p>
+                <div class="hero-actions">
+                    <a class="btn-primary" href="#jadwal">Lihat jadwal mingguan →</a>
+                    <!-- 4. Tombol Bagikan Media Sosial -->
+                    <button class="btn-secondary" id="btn-share-wa">📱 Bagikan via WA</button>
+                </div>
+            </div>
+
+            <aside class="today" aria-live="polite">
+                <p class="today-date" id="today-date">Memuat tanggal...</p>
+                <p class="today-clock" id="today-clock">--:--</p>
+                <p class="today-status" id="today-status">Memuat jadwal...</p>
+                <ul class="today-list" id="today-list"></ul>
+            </aside>
+        </section>
+
+        <section class="section" id="jadwal">
+            <div class="section-head">
+                <h2>Jadwal Mingguan</h2>
+                <p>Pilih hari untuk menyaring jadwal. Hari ini ditandai otomatis.</p>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Filter hari" id="tabs"></div>
+            <div class="week" id="week"></div>
+
+            <!-- 5. Rencana Cadangan (Backup Data Jadwal) -->
+            <div class="backup-bar">
+                <div>
+                    <strong>Backup Data Jadwal:</strong> Cadangkan data jadwal format JSON untuk keamanan data.
+                </div>
+                <button class="btn-secondary" id="btn-backup-json" style="padding: 6px 14px; font-size: 0.85rem;">💾 Unduh Backup JSON</button>
+            </div>
+        </section>
+
+        <section class="section" id="matkul">
+            <div class="section-head">
+                <h2>KRS Semester 1</h2>
+                <p>Tahun ajaran 2026 Ganjil. Mata kuliah, dosen pengampu, jadwal, dan beban SKS. <span id="ringkas-krs"></span></p>
+            </div>
+            <div class="table-wrap">
+                <table class="matkul-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Kode</th>
+                            <th scope="col">Mata Kuliah</th>
+                            <th scope="col">Dosen Pengampu</th>
+                            <th scope="col">Jadwal</th>
+                            <th scope="col">SKS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matkul-body"></tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="row" colspan="4">Total SKS</th>
+                            <td id="total-sks"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- 1. IDENTITAS & KONTAK (ABOUT US, FORMULIR KONTAK & GOOGLE MAPS) -->
+        <section class="section" id="tentang">
+            <div class="section-head">
+                <h2>Tentang & Kontak Kami</h2>
+                <p>Informasi penyelenggara web HI-CLASS dan peta lokasi gedung perkuliahan Teknik Informatika UNILA.</p>
+            </div>
+            <div class="about-grid">
+                <div class="contact-box">
+                    <h3>Tentang Web PSTI-D</h3>
+                    <p style="color: var(--text-muted); margin: 10px 0 18px; font-size: 0.95rem;">
+                        Web ini dikembangkan oleh Mahasiswa PSTI-D sebagai Tugas Akhir program kerja <strong>HI-CLASS (HIMATRO Class)</strong> Jurusan Teknik Elektro Universitas Lampung.
+                    </p>
+                    
+                    <h4>Formulir Kontak Pengurus</h4>
+                    <form id="contact-form" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;" onsubmit="return false;">
+                        <div class="form-group">
+                            <input type="text" id="contact-name" placeholder="Nama Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contact-msg" rows="3" placeholder="Pesan atau pertanyaan perihal jadwal..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="justify-content: center; padding: 10px;">Kirim Pesan</button>
+                    </form>
+                </div>
+
+                <!-- Google Maps Integrasi Lokasi Teknik Elektro/Informatika UNILA -->
+                <div class="maps-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.339678393529!2d105.24151747498394!3d-5.36506379461372!2m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40cdb1480f7457%3A0xb5b73679c13b2c6b!2sTeknik%20Elektro%20Unila!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seksi Info Kelas (Bagian Grup Kelas Sudah Dihapus Sesuai Perintah) -->
+        <section class="section" id="info">
+            <div class="section-head">
+                <h2>Info Kelas</h2>
+            </div>
+            <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div class="info-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 24px; backdrop-filter: blur(10px);">
+                    <h3>Pengurus Kelas</h3>
+                    <p style="color: var(--text-muted);">Ketua: MICHAEL TILOSAND XAVIER<br>Sekretaris: ALZIARA PUTRI HABILLAH</p>
+                </div>
+                <div class="info-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 24px; backdrop-filter: blur(10px);">
+                    <h3>Perubahan Jadwal</h3>
+                    <p style="color: var(--text-muted);">Kuliah pengganti & dispensasi diumumkan resmi lewat grup kelas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 2. FOOTER & COPYRIGHT -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <strong>Kelas PSTI-D Teknik Informatika UNILA</strong>
+                <p style="font-size: 0.85rem; margin-top: 4px;">© 2026 HI-CLASS HIMATRO. All Rights Reserved.</p>
+            </div>
+            <!-- 2. Link Legalitas -->
+            <div class="footer-links">
+                <button id="btn-privacy">Kebijakan Privasi</button>
+                <button id="btn-terms">Syarat & Ketentuan</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logika Lengkap -->
+    <script>
+        /* ---------- Dynamic Canvas Animated Electric Particles (HIMATRO Theme) ---------- */
+        (function initElectricCanvas() {
+            const canvas = document.getElementById("electric-canvas");
+            const ctx = canvas.getContext("2d");
+            let width, height;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener("resize", resize);
+            resize();
+
+            const particles = Array.from({ length: 30 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: Math.random() * 1.8 + 0.5,
+                alpha: Math.random() * 0.6 + 0.2
+            }));
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p1 = particles[i];
+                    p1.x += p1.vx;
+                    p1.y += p1.vy;
+
+                    if (p1.x < 0 || p1.x > width) p1.vx *= -1;
+                    if (p1.y < 0 || p1.y > height) p1.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(56, 189, 248, ${p1.alpha})`;
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 140) {
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 140)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+
+            // Efek Flash Arus Listrik saat Scroll
+            const scrollFlash = document.getElementById("scroll-flash");
+            let scrollTimer;
+            window.addEventListener("scroll", () => {
+                scrollFlash.classList.add("active");
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    scrollFlash.classList.remove("active");
+                }, 400);
+            });
+        })();
+
+        /* ---------- Data KRS & Jadwal ---------- */
+        const MATKUL = [
+            { kode: "INF625101", nama: "Pengenalan Pemrograman", sks: 2, dosen: ["Yessi Mulyani, S.T., M.T.", "Bambang Sundari, S.Kom., M.T.", "Nurrahma, M.T."] },
+            { kode: "INF625102", nama: "Algoritma Pemrograman", sks: 3, dosen: ["Wahyu Eko Sulistiono, S.T., M.Sc.", "Ir. Titin Yulianti, S.T., M.Eng."] },
+            { kode: "INF625103", nama: "Kalkulus", sks: 2, dosen: ["Zulmiftah Huda, S.T., M.Eng.", "Nurrahma, M.T."] },
+            { kode: "INF625104", nama: "Praktikum Pengenalan Pemrograman", sks: 1, dosen: ["Yessi Mulyani, S.T., M.T.", "Bambang Sundari, S.Kom., M.T."] },
+            { kode: "INF625105", nama: "Logika", sks: 2, dosen: ["Sumadi, S.T., M.T.", "Nurrahma, M.T."] },
+            { kode: "INF625106", nama: "Probabilitas dan Statistik", sks: 3, dosen: ["Resty Annisa, S.ST., M.Kom.", "Rio Ariestia Pradipta, S.Kom., M.T.I."] },
+            { kode: "INF625107", nama: "Teknik Digital", sks: 2, dosen: ["Mona Arif Muda, S.T., M.T.", "Rizkima Akbar Setiawan, S.T., M.T."] },
+            { kode: "INF625108", nama: "Praktikum Teknik Digital", sks: 1, dosen: ["Mona Arif Muda, S.T., M.T."] },
+            { kode: "UNI625107", nama: "Pancasila", sks: 2, dosen: ["Susilo, S.Pd., M.Pd.", "Fitra Endi Fernanda, M.Pd."] },
+            { kode: "UNI625109", nama: "Bahasa Indonesia", sks: 2, dosen: ["Rian Andri Prasetya, S.Pd., M.Pd.", "Detia Aulia Oktarina, M.Pd."] }
+        ];
+
+        const SLOT = [
+            { kode: "INF625105", hari: 1, mulai: "09:10", selesai: "10:50", ruang: "Mektan 3.1" },
+            { kode: "INF625107", hari: 1, mulai: "14:30", selesai: "16:10", ruang: "Mektan 3.1" },
+            { kode: "INF625106", hari: 2, mulai: "07:30", selesai: "10:00", ruang: "Mektan 3.2" },
+            { kode: "INF625103", hari: 3, mulai: "07:30", selesai: "09:10", ruang: "Mektan 3.2" },
+            { kode: "UNI625109", hari: 3, mulai: "09:10", selesai: "10:50", ruang: "H17" },
+            { kode: "INF625101", hari: 4, mulai: "13:00", selesai: "14:40", ruang: "H17" },
+            { kode: "UNI625107", hari: 5, mulai: "10:50", selesai: "11:40", ruang: "H19" },
+            { kode: "INF625102", hari: 5, mulai: "14:40", selesai: "16:00", ruang: "Mektan 3.2" },
+            { kode: "INF625104", hari: 5, mulai: "15:45", selesai: "17:00", ruang: "H5", catatan: "Toleransi s/d 15:55 (Khusus PSTI-D)" }
+        ];
+
+        const JADWAL = SLOT.map((s) => {
+            const m = MATKUL.find((x) => x.kode === s.kode);
+            return { ...s, matkul: m.nama, dosen: m.dosen, sks: m.sks };
+        });
+
+        const NAMA_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const HARI_KULIAH = [1, 2, 3, 4, 5];
+        let filterAktif = "semua";
+
+        const el = (id) => document.getElementById(id);
+        const menit = (jam) => {
+            const [h, m] = jam.split(":").map(Number);
+            return h * 60 + m;
+        };
+        const urut = (a, b) => menit(a.mulai) - menit(b.mulai);
+
+        function renderHariIni() {
+            const now = new Date();
+            const hari = now.getDay();
+            const sekarang = now.getHours() * 60 + now.getMinutes();
+
+            el("today-date").textContent = now.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+            el("today-clock").textContent = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", hour12: false }).replace(".", ":");
+
+            const daftar = JADWAL.filter((j) => j.hari === hari).sort(urut);
+            const list = el("today-list");
+            const status = el("today-status");
+
+            if (daftar.length === 0) {
+                status.textContent = HARI_KULIAH.includes(hari) ? "Tidak ada kuliah hari ini." : "Akhir pekan, tidak ada kuliah.";
+                list.innerHTML = "";
+                return;
+            }
+
+            const berlangsung = daftar.find((j) => sekarang >= menit(j.mulai) && sekarang < menit(j.selesai));
+            const berikutnya = daftar.find((j) => menit(j.mulai) > sekarang);
+
+            if (berlangsung) {
+                status.textContent = `Sedang berlangsung: ${berlangsung.matkul}, sampai ${berlangsung.selesai}.`;
+            } else if (berikutnya) {
+                status.textContent = `Berikutnya: ${berikutnya.matkul}, pukul ${berikutnya.mulai}.`;
+            } else {
+                status.textContent = "Kuliah hari ini sudah selesai.";
+            }
+
+            list.innerHTML = daftar.map((j) => {
+                const kelas = j === berlangsung ? "now" : sekarang >= menit(j.selesai) ? "done" : "";
+                return `<li class="${kelas}">
+                    <span class="jam">${j.mulai} - ${j.selesai}</span>
+                    <span class="nama">${j.matkul}<span class="ruang">${j.ruang}</span></span>
+                </li>`;
+            }).join("");
+        }
+
+        function renderTabs() {
+            const hariIni = new Date().getDay();
+            const pilihan = [["semua", "Semua"], ...HARI_KULIAH.map((h) => [String(h), NAMA_HARI[h]])];
+
+            el("tabs").innerHTML = pilihan.map(([nilai, label]) => {
+                const penanda = nilai === String(hariIni) ? '<span class="dot" title="Hari ini"></span>' : "";
+                return `<button class="tab" role="tab" data-hari="${nilai}" aria-selected="${nilai === filterAktif}">${label}${penanda}</button>`;
+            }).join("");
+
+            el("tabs").querySelectorAll(".tab").forEach((tombol) => {
+                tombol.addEventListener("click", () => {
+                    filterAktif = tombol.dataset.hari;
+                    renderTabs();
+                    renderMingguan();
+                });
+            });
+        }
+
+        function cariBentrok(slot) {
+            const bentrok = new Set();
+            const TOLERANSI_MENIT = 15;
+            for (let i = 1; i < slot.length; i++) {
+                if (menit(slot[i - 1].selesai) - menit(slot[i].mulai) > TOLERANSI_MENIT) {
+                    bentrok.add(slot[i - 1]); bentrok.add(slot[i]);
+                }
+            }
+            return bentrok;
+        }
+
+        function renderMingguan() {
+            const hariIni = new Date().getDay();
+            const tampil = filterAktif === "semua" ? HARI_KULIAH : [Number(filterAktif)];
+
+            el("week").innerHTML = tampil.map((h) => {
+                const slot = JADWAL.filter((j) => j.hari === h).sort(urut);
+                const bentrok = cariBentrok(slot);
+                const isi = slot.length
+                    ? slot.map((j) => `<div class="slot${bentrok.has(j) ? " bentrok" : ""}">
+                            <span class="jam">${j.mulai} - ${j.selesai}</span>
+                            <span class="matkul">${j.matkul}<span class="kode">${j.kode}, ${j.sks} SKS${j.catatan ? ` • <i>${j.catatan}</i>` : ""}</span></span>
+                            <span class="dosen">${j.dosen.join("<br>")}</span>
+                            <span class="ruang">${j.ruang}</span>
+                        </div>`).join("")
+                    : '<p class="day-empty">Tidak ada kuliah hari ini.</p>';
+                const penanda = h === hariIni ? '<span class="badge-today">Hari Ini</span>' : "";
+
+                return `<article class="day ${h === hariIni ? "is-today" : ""}">
+                    <div class="day-title"><h3>${NAMA_HARI[h]}</h3>${penanda}</div>
+                    ${isi}
+                </article>`;
+            }).join("");
+        }
+
+        function renderMatkul() {
+            el("matkul-body").innerHTML = MATKUL.map((m) => {
+                const jadwal = JADWAL.filter((j) => j.kode === m.kode)
+                    .sort((a, b) => a.hari - b.hari || urut(a, b))
+                    .map((j) => `${NAMA_HARI[j.hari]} ${j.mulai}-${j.selesai}, ${j.ruang}`);
+                return `<tr>
+                    <td class="kode">${m.kode}</td>
+                    <td class="nama-mk">${m.nama}</td>
+                    <td>${m.dosen.join("<br>")}</td>
+                    <td>${jadwal.length ? jadwal.join("<br>") : '<span class="belum">Belum ada jadwal</span>'}</td>
+                    <td>${m.sks}</td>
+                </tr>`;
+            }).join("");
+
+            const total = MATKUL.reduce((jumlah, m) => jumlah + m.sks, 0);
+            el("total-sks").textContent = total;
+            el("ringkas-krs").textContent = `${MATKUL.length} mata kuliah, ${total} SKS.`;
+        }
+
+        /* ---------- Sistem Login & Modal (Auth) ---------- */
+        const authModal = el("auth-modal");
+        const btnLoginOpen = el("btn-login-open");
+        const modalClose = el("modal-close");
+        const tabLoginBtn = el("tab-login-btn");
+        const tabRegisterBtn = el("tab-register-btn");
+        const formLogin = el("form-login");
+        const formRegister = el("form-register");
+        const userProfile = el("user-profile");
+        const userDisplayName = el("user-display-name");
+        const btnLogout = el("btn-logout");
+
+        btnLoginOpen.addEventListener("click", () => authModal.classList.add("active"));
+        modalClose.addEventListener("click", () => authModal.classList.remove("active"));
+        authModal.addEventListener("click", (e) => { if (e.target === authModal) authModal.classList.remove("active"); });
+
+        tabLoginBtn.addEventListener("click", () => {
+            tabLoginBtn.classList.add("active"); tabRegisterBtn.classList.remove("active");
+            formLogin.classList.add("active"); formRegister.classList.remove("active");
+        });
+
+        tabRegisterBtn.addEventListener("click", () => {
+            tabRegisterBtn.classList.add("active"); tabLoginBtn.classList.remove("active");
+            formRegister.classList.add("active"); formLogin.classList.remove("active");
+        });
+
+        function getUsers() { return JSON.parse(localStorage.getItem("tid_users") || "[]"); }
+        function saveUsers(users) { localStorage.setItem("tid_users", JSON.stringify(users)); }
+
+        function checkActiveUser() {
+            const activeUser = JSON.parse(localStorage.getItem("tid_active_user"));
+            if (activeUser) {
+                btnLoginOpen.style.display = "none";
+                userProfile.style.display = "flex";
+                userDisplayName.textContent = activeUser.fullname;
+            } else {
+                btnLoginOpen.style.display = "block";
+                userProfile.style.display = "none";
+            }
+        }
+
+        formRegister.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const fullname = el("reg-fullname").value.trim();
+            const npm = el("reg-npm").value.trim();
+            const password = el("reg-password").value;
+
+            const users = getUsers();
+            if (users.find(u => u.npm === npm)) { alert("NPM/Username ini sudah terdaftar!"); return; }
+
+            const newUser = { fullname, npm, password };
+            users.push(newUser); saveUsers(users);
+
+            localStorage.setItem("tid_active_user", JSON.stringify(newUser));
+            authModal.classList.remove("active"); formRegister.reset();
+            checkActiveUser(); alert(`Selamat datang, ${fullname}! Akun berhasil dibuat.`);
+        });
+
+        formLogin.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const usernameInput = el("login-username").value.trim();
+            const passwordInput = el("login-password").value;
+
+            const users = getUsers();
+            const foundUser = users.find(u => (u.npm === usernameInput || u.fullname === usernameInput) && u.password === passwordInput);
+
+            if (foundUser) {
+                localStorage.setItem("tid_active_user", JSON.stringify(foundUser));
+                authModal.classList.remove("active"); formLogin.reset(); checkActiveUser();
+            } else {
+                alert("Username/NPM atau Password salah!");
+            }
+        });
+
+        btnLogout.addEventListener("click", () => {
+            localStorage.removeItem("tid_active_user");
+            checkActiveUser();
+        });
+
+        /* ---------- 2. Modal Legalitas (Kebijakan Privasi & Terms) ---------- */
+        const legalModal = el("legal-modal");
+        const legalTitle = el("legal-title");
+        const legalContent = el("legal-content");
+
+        el("btn-privacy").addEventListener("click", () => {
+            legalTitle.textContent = "Kebijakan Privasi (Privacy Policy)";
+            legalContent.innerHTML = "<p>Sesuai kepatuhan UU PDP, data login (NPM & Password) disimpan secara lokal pada browser pengguna (LocalStorage) dan tidak dikirim ke pihak ketiga.</p>";
+            legalModal.classList.add("active");
+        });
+
+        el("btn-terms").addEventListener("click", () => {
+            legalTitle.textContent = "Syarat & Ketentuan (Terms of Service)";
+            legalContent.innerHTML = "<p>Penggunaan platform ini ditujukan khusus mahasiswa Teknik Informatika UNILA untuk mengakses informasi jadwal resmi. Dilarang melakukan penyalahgunaan data.</p>";
+            legalModal.classList.add("active");
+        });
+
+        el("legal-modal-close").addEventListener("click", () => legalModal.classList.remove("active"));
+
+        /* ---------- 4. Fitur Bagikan WhatsApp ---------- */
+        el("btn-share-wa").addEventListener("click", () => {
+            const text = encodeURIComponent("Cek Jadwal Kuliah PSTI-D Teknik Informatika UNILA hari ini di portal web resmi!");
+            window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
+        });
+
+        /* ---------- 5. Backup Data JSON ---------- */
+        el("btn-backup-json").addEventListener("click", () => {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(SLOT, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "backup_jadwal_pstid.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        });
+
+        /* ---------- Contact Form Submit ---------- */
+        el("contact-form").addEventListener("submit", () => {
+            alert("Pesan Anda berhasil dikirimkan ke pengurus kelas PSTI-D!");
+            el("contact-form").reset();
+        });
+
+        /* ---------- Inisialisasi ---------- */
+        renderTabs();
+        renderMingguan();
+        renderMatkul();
+        renderHariIni();
+        checkActiveUser();
+        setInterval(renderHariIni, 30000);
+    </script>
+</body>
+</html>
